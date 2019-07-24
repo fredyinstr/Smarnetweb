@@ -1,0 +1,32 @@
+<div class="col-12 pt-3  w-100">
+    <h4>Notificaciones de alarma</h4>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Tipo notificación</th>
+                <th scope="col">Val medido</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let notificacion of notificaciones">
+                <th>{{ retornaFecha(notificacion.fecha)}}</th>
+                <td>{{notificacion.descripcion}}</td>
+                <td *ngIf="notificacion.codigoNot==1">valor bajo</td>
+                <td *ngIf="notificacion.codigoNot==2">valor alto</td>
+                <td *ngIf="notificacion.codigoNot==3">valor muy bajo</td>
+                <td *ngIf="notificacion.codigoNot==4">valor muy alto</td>
+                <td>{{notificacion.medida}} {{notificacion.simbolo}}</td>
+                <td *ngIf="notificacion.ack==0">
+                    <button type="button" class="btn btn-success" (click)="revisar(notificacion.notificacion_id)">OK</button>
+                </td>
+                <td *ngIf="notificacion.ack==1">
+                    <p class="text-success">Revisado</p>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

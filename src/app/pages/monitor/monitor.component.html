@@ -1,0 +1,17 @@
+<div class="container pl-2 pt-2">
+
+    <div class="card" *ngFor="let tag_id of tags">
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4 text-center">
+                    <app-gauge [tag_id]=" tag_id "></app-gauge>
+                </div>
+                <div class="col-8">
+                    <app-chart [tag_id]="tag_id "></app-chart>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
