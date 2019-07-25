@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { timer} from 'rxjs';
 import {takeWhile} from 'rxjs/operators';
@@ -8,10 +8,13 @@ import {takeWhile} from 'rxjs/operators';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit, OnDestroy {
+export class ChartComponent implements OnInit, OnDestroy, OnChanges {
 
   private alive  = true;
   @Input() tag_id: any;
+  @Input() continuo = true;
+  @Input() desde = '';
+  @Input() hasta = '';
 
    // lineChart
 
@@ -19,72 +22,90 @@ export class ChartComponent implements OnInit, OnDestroy {
    public lineChartType = 'line';
    public lineChartData: Array<any> = [
    {
-     data: [
-     {x: 0, y: 0},
-     {x: 5, y: 0},
-     {x: 10, y: 0},
-     {x: 15, y: 0},
-     {x: 20, y: 0},
-     {x: 25, y: 0},
-     {x: 30, y: 0}
-   ]}
+     data: []
+    }
  ];
 
-
- public lineChartOptions: any = {
-   scales: {
-           xAxes: [{
-             time: {
-               unit: 'minute'
-               },
-               type: 'time',
-               distribution: 'series',
-               position: 'bottom'
-           }],
-           yAxes: [{
-             ticks: {
-                 beginAtZero: true
+legend = 'Temp °C';
+public lineChartOptions: any = {
+  scales: {
+          xAxes: [{
+            time: {
+              unit: 'minute'
+              },
+              type: 'time',
+              distribution: 'series',
+              position: 'bottom',
+              ticks: {
+               autoSkip: true
              }
-         }]
+          }],
+          yAxes: [{
+            ticks: {
+               //  beginAtZero: true
+               source: 'auto'
+            },
+            scaleLabel: {
+             display: true,
+             labelString: this.legend
+           }
+        }]
+      },
+      responsive: true,
+      animation: false,
+      legend: {
+          display: false
+        },
+        tooltips: {
+         mode: 'index',
+         // position: 'cursor',
+         intersect: false
        },
-       responsive: true,
-       animation: false,
-       legend: {
-           display: false
-         },
-         elements: {
-           line: {
-             fill: false,
-             tension: false
-           },
-         }
+        elements: {
+          line: {
+            fill: false,
+            tension: false,
+            lineTension: 0,
+            borderWidth: 1.5
+          },
+          point: {
+           radius: 0
+           }
+        }
 
- };
+};
 
   constructor( public _dataService: DataService) { }
 
+  actualizar() {
+    this._dataService.actualizaChart(this.tag_id, this.desde, this.hasta)
+          .subscribe((data: any) => {
+            console.log('Data chart: ' + data['data']);
+            this.lineChartData = data['data'];
+          });
+  }
+
+  ngOnChanges() {
+    console.log('Ocurrió un cambio...', this.tag_id);
+    this.actualizar();
+  }
+
   ngOnInit() {
-    this._dataService.taginfo(this.tag_id)
-    .subscribe( (resp: any) => {
-      console.log('Respuesta chart: ', resp['taginfo'] );
-      const taginfo: any = resp['taginfo'];
-    });
+    // this._dataService.taginfo(this.tag_id)
+    // .subscribe( (resp: any) => {
+    //   console.log('Respuesta chart: ', resp['taginfo'] );
+    //   const taginfo: any = resp['taginfo'];
+    // });
 
 
-    timer(100, 60000).pipe(takeWhile(() => this.alive)).subscribe(() => {
-        console.log('obteniendo Chart...');
-        this._dataService.actualizaChart(this.tag_id)
-        .subscribe((data: any) => {
-          console.log('Data chart: ' + data['data']);
-          this.lineChartData = data['data'];
+    if (this.continuo) {
+      timer(100, 10000).pipe(takeWhile(() => this.alive)).subscribe(() => {
+          console.log('obteniendo Chart...');
+          this.actualizar();
         });
-
-      });
-
-
-
-
-
+      } else {
+        this.actualizar();
+      }
   }
 
   ngOnDestroy() {

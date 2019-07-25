@@ -1,3 +1,17 @@
-<p>
-    Reportes estará habilidado en los próximos días!
-</p>
+<div class="row">
+    <div class="col-12">
+        <form>
+            <div class="form-group">
+                <label for="tag">Nombre Tag</label>
+                <select class="form-control" id="tag" name="tag" (change)="traerReporte($event)">
+                <option [value]=tag.tag_id *ngFor="let tag of tag_list" >{{tag.tag_descripcion}}</option>                
+              </select>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <app-chart [tag_id]="tag_id" [continuo]='false'></app-chart>
+    </div>
+</div>

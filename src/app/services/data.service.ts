@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient  } from '@angular/common/http';
+import { HttpClient, HttpParams  } from '@angular/common/http';
 // import { Observable } from 'rxjs/Observable';
 import { URL_SERVICIOS } from '../config/config';
 
@@ -23,9 +23,14 @@ export class DataService {
     return this.http.get(url);
   }
 
-  actualizaChart(tag: any) {
+  actualizaChart(tag: any, desde: any = '', hasta: any = '') {
+    // const url = URL_SERVICIOS + 'iotdata/historico/' + tag;
+    // return this.http.get(url);
+    let params = new HttpParams();
+    params = params.append('desde', desde);
+    params = params.append('hasta', hasta);
     const url = URL_SERVICIOS + 'iotdata/historico/' + tag;
-    return this.http.get(url);
+    return this.http.get(url, { params: params });
   }
 
   notificaciones(cliente: any) {
