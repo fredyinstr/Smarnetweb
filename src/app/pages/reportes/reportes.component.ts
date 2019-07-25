@@ -8,7 +8,7 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./reportes.component.css']
 })
 export class ReportesComponent implements OnInit {
-  tag_id = 29;
+  tag_id;
   tag_list = [];
 
   constructor( private _dataService: DataService) { }
@@ -23,6 +23,7 @@ export class ReportesComponent implements OnInit {
       .subscribe((resp: any) => {
         console.log(resp);
         this.tag_list = resp.tags;
+        this.tag_id = resp.tags[0].tag_id;
       });
   }
 

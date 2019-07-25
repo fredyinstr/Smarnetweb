@@ -1,4 +1,5 @@
 <div>
-    <canvas baseChart width="400" height="160" [datasets]="lineChartData" [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType">
+    <canvas *ngIf="tag_id" baseChart width="400" height="160" [datasets]="lineChartData" [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType">
     </canvas>
+    <p *ngIf="!tag_id">Seleccione tag</p>
 </div>

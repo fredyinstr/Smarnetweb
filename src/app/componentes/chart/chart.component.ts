@@ -78,19 +78,25 @@ public lineChartOptions: any = {
   constructor( public _dataService: DataService) { }
 
   actualizar() {
-    this._dataService.actualizaChart(this.tag_id, this.desde, this.hasta)
-          .subscribe((data: any) => {
-            console.log('Data chart: ' + data['data']);
-            this.lineChartData = data['data'];
-          });
+    if (this.tag_id) {
+      this._dataService.actualizaChart(this.tag_id, this.desde, this.hasta)
+            .subscribe((data: any) => {
+              console.log('Data chart: ' + data['data']);
+              this.lineChartData = data['data'];
+            });
+          } else {
+            return;
+          }
   }
 
   ngOnChanges() {
     console.log('Ocurrió un cambio...', this.tag_id);
-    this.actualizar();
+      this.actualizar();
   }
 
   ngOnInit() {
+    console.log('Desde: ', this.desde);
+    console.log('Hasta: ', this.hasta);
     // this._dataService.taginfo(this.tag_id)
     // .subscribe( (resp: any) => {
     //   console.log('Respuesta chart: ', resp['taginfo'] );
@@ -107,6 +113,7 @@ public lineChartOptions: any = {
         this.actualizar();
       }
   }
+
 
   ngOnDestroy() {
     this.alive = false;
