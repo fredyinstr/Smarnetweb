@@ -22,14 +22,17 @@
     "@angular/router": "~7.0.0",
     "@types/chart.js": "^2.7.55",
     "angular2-justgage": "^0.3.0",
+    "bootstrap": "4.1.1",
     "chart.js": "^2.7.3",
     "core-js": "^2.5.4",
     "eve-raphael": "^0.5.0",
     "justgage": "^1.2.2",
     "lodash": "^4.17.14",
     "ng2-charts": "^1.6.0",
+    "ngx-bootstrap": "^5.1.0",
     "raphael": "^2.2.7",
     "rxjs": "~6.3.3",
+    "sweetalert2": "^8.14.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

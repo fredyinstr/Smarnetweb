@@ -1,17 +1,56 @@
 <div class="row">
     <div class="col-12">
-        <form>
-            <div class="form-group">
-                <label for="tag">Nombre Tag</label>
-                <select class="form-control" id="tag" name="tag" (change)="traerReporte($event)">
-                <option [value]=tag.tag_id *ngFor="let tag of tag_list" >{{tag.tag_descripcion}}</option>                
-              </select>
-            </div>
-        </form>
+        <h4>Reporte por fecha</h4>
+        <hr>
     </div>
 </div>
 <div class="row">
     <div class="col-12">
-        <app-chart [tag_id]="tag_id" desde="2019-07-24 00:00:00" hasta="2019-07-24 10:00:00" [continuo]='false'></app-chart>
+        <form>
+
+            <div class="form-group row">
+                <label for="fd" class="col-sm-1 align-self-center">Desde</label>
+                <div class="col-sm-2 align-self-center">
+                    <input type="text" [(ngModel)]="fd" name="fd" placeholder="Desde" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+                </div>
+                <div class="col-sm-3">
+                    <timepicker [showMeridian]="ismeridian" [(ngModel)]="hd" name="hd"></timepicker>
+                </div>
+                <!-- </div>
+            <div class="form-group row"> -->
+                <label for="fh" class="col-sm-1 align-self-center">Hasta</label>
+                <div class="col-sm-2 align-self-center">
+                    <input type="text" [(ngModel)]="fh" name="fh" placeholder="Hasta" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+                </div>
+                <div class="col-sm-3">
+                    <timepicker [showMeridian]="ismeridian" [(ngModel)]="hh" name="hh"></timepicker>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="tag" class="col-sm-2">Nombre Tag</label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="tag" name="tag" (change)="selectTag($event)">
+                    <option>Seleccionar Tag</option>                
+                    <option [value]=tag.tag_id *ngFor="let tag of tag_list" >{{tag.tag_descripcion}}</option>                
+                  </select>
+                </div>
+                <!-- </div>
+            <div class="form-group row"> -->
+                <button (click)="buscar()" class="btn btn-primary">Buscar</button>
+            </div>
+
+        </form>
     </div>
+</div>
+
+
+
+
+<div class="row">
+
+    <div class="col-11">
+        <app-chart [tag_id]="tag_id" [desde]="fechaDesde" [hasta]="fechaHasta" [continuo]='false'></app-chart>
+    </div>
+
 </div>

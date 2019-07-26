@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { JustgageModule } from 'angular2-justgage';
 import { ChartsModule } from 'ng2-charts';
 
+
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -19,6 +20,9 @@ import { GaugeComponent } from './componentes/gauge/gauge.component';
 import { ChartComponent } from './componentes/chart/chart.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { LimitesComponent } from './pages/limites/limites.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,10 @@ import { LimitesComponent } from './pages/limites/limites.component';
     JustgageModule,
     ChartsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule,
+    TimepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
