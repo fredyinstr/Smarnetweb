@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
+
 
 @Component({
   selector: 'app-monitor',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class MonitorComponent implements OnInit {
   tag_id = '29';
 
-  tags: any [] = [29, 30, 31, 33, 34, 35, 37, 38, 39];
+  tags: any [] = [];
 
   options = {
     title: 'Bloque 1 T1'
@@ -64,9 +66,14 @@ export class MonitorComponent implements OnInit {
 
   };
 
-  constructor() { }
+  constructor( private _dataService: DataService) { }
 
   ngOnInit() {
+    this._dataService.tagsPorCliente(1)
+      .subscribe((resp: any) => {
+        console.log('Tags por cliente: ', resp.tags);
+        this.tags = resp.tags;
+      });
   }
 
 }

@@ -9,6 +9,7 @@ import { DataService } from '../../services/data.service';
 })
 export class AlarmasComponent implements OnInit {
   notificaciones: any;
+  clicked = false;
 
   constructor( public _dataService: DataService ) { }
 
@@ -34,11 +35,12 @@ export class AlarmasComponent implements OnInit {
     const notificaciones: any = resp['notificaciones'];
     console.log('Notificaciones: ', notificaciones);
     this.notificaciones = resp['notificaciones'];
+    this.clicked = false;
   });
 }
 
   revisar(noti_id) {
-    // console.log('Revisar: ', noti_id);
+    this.clicked = true;
     this._dataService.revisarNotificacion( noti_id )
     .subscribe( ( resp: any ) => {
       console.log('Recibido revisar: ', resp);

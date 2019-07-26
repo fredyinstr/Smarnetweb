@@ -31,7 +31,7 @@
                 <label for="tag" class="col-sm-2">Nombre Tag</label>
                 <div class="col-sm-4">
                     <select class="form-control" id="tag" name="tag" (change)="selectTag($event)">
-                    <option>Seleccionar Tag</option>                
+                    <option value=''>Seleccionar Tag</option>                
                     <option [value]=tag.tag_id *ngFor="let tag of tag_list" >{{tag.tag_descripcion}}</option>                
                   </select>
                 </div>

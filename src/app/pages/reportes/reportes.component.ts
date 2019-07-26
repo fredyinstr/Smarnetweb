@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'; // https://www.npmjs.com/package/sweetalert2
   styleUrls: ['./reportes.component.css']
 })
 export class ReportesComponent implements OnInit {
-  tagSeleccionado = null;
+  tagSeleccionado = '';
   tag_id;
   tag_list = [];
   fechaDesde = '';
@@ -37,7 +37,7 @@ export class ReportesComponent implements OnInit {
   buscar() {
     const millisDesde = new Date(this.convertirFecha(this.fd, this.hd)).getTime();
     const millisHasta = new Date(this.convertirFecha(this.fh, this.hh)).getTime();
-    if (this.tagSeleccionado === null) {
+    if (this.tagSeleccionado === '') {
       console.log('Debe seleccionar un Tag');
       Swal.fire('Oops...', 'Debe seleccionar un Tag!', 'error');
       return;

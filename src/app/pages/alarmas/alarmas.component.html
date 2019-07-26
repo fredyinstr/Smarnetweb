@@ -20,7 +20,7 @@
                 <td *ngIf="notificacion.codigoNot==4">valor muy alto</td>
                 <td>{{notificacion.medida}} {{notificacion.simbolo}}</td>
                 <td *ngIf="notificacion.ack==0">
-                    <button type="button" class="btn btn-success" (click)="revisar(notificacion.notificacion_id)">OK</button>
+                    <button type="button" [disabled]="clicked" class="btn btn-success" (click)="revisar(notificacion.notificacion_id)">OK</button>
                 </td>
                 <td *ngIf="notificacion.ack==1">
                     <p class="text-success">Revisado</p>
