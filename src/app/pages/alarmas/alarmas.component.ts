@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import Swal from 'sweetalert2'; // https://www.npmjs.com/package/sweetalert2
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 
 @Component({
@@ -10,8 +13,16 @@ import { DataService } from '../../services/data.service';
 export class AlarmasComponent implements OnInit {
   notificaciones: any;
   clicked = false;
+  telefono1 = '';
+  correo1 = '';
+  correo2 = '';
 
   constructor( public _dataService: DataService ) { }
+  generarPdf() {
+    const doc = new jsPDF();
+    doc.autoTable({html: '#notificacionesTable'});
+    doc.save('notificaciones.pdf');
+  }
 
   retornaFecha( fecha ) {
     const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
@@ -29,7 +40,7 @@ export class AlarmasComponent implements OnInit {
   }
 
   cargarNotificaciones() {
-    this._dataService.notificaciones(1)
+    this._dataService.notificaciones(2)
     .subscribe( (resp: any) => {
     // console.log('Respuesta: ', resp['taginfo'] );
     const notificaciones: any = resp['notificaciones'];
@@ -47,7 +58,23 @@ export class AlarmasComponent implements OnInit {
       this.cargarNotificaciones();
     });
   }
+
+  actualizarMedios() {
+    this._dataService.updateMedioNotificaciones(2, this.telefono1, this.correo1, this.correo2)
+      .subscribe( (resp: any) => {
+        // console.log('respuesta guardar limites: ', resp );
+        Swal.fire('OK', resp.respuesta, 'success');
+      });
+  }
+
   ngOnInit() {
+    this._dataService.ObtenerMedioNotificaciones(2)
+      .subscribe( (resp: any ) => {
+        console.log('respuesta medios: ', resp);
+        this.telefono1 = resp.medios.telefono1 === 'null' ? 'Sin definir' : resp.medios.telefono1;
+        this.correo1 = resp.medios.correo1 === 'null' ? 'Sin definir' : resp.medios.correo1;
+        this.correo2 = resp.medios.correo2 === 'null' ? 'Sin definir' : resp.medios.correo2;
+      });
     this.cargarNotificaciones();
   }
 

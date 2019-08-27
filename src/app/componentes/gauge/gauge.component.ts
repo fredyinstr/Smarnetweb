@@ -12,6 +12,8 @@ import {takeWhile} from 'rxjs/operators';
 export class GaugeComponent implements OnInit, OnDestroy {
 
   @Input() tag_id: any;
+  @Input() lim_bajo: any;
+  @Input() lim_alto: any;
 
 
   constructor( public _dataService: DataService) { }
@@ -21,6 +23,9 @@ export class GaugeComponent implements OnInit, OnDestroy {
   value = null;
   private alive = true;
   fecha: any;
+  verde = true;
+  azul = false;
+  rojo = false;
 
   retornaFecha( fecha ) {
     const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
@@ -44,12 +49,20 @@ export class GaugeComponent implements OnInit, OnDestroy {
       const taginfo: any = resp['taginfo'];
       this.options = {
         title: taginfo.tag_descripcion,
+        titleFontColor : 'black',
         min: taginfo.tag_valor_min,
         pointer: false,
         decimals: 2,
         gaugeWidthScale : 0.8,
         counter: true,
-        symbol: '°C'
+        symbol: taginfo.tag_symbol,
+        // label: this.fecha,
+        labelFontColor: 'black',
+        shadowOpacity: 1,
+        shadowSize: 5,
+        shadowVerticalOffset: 1,
+        valueFontFamily: 'Arial, Helvetica, sans-serif',
+        valueFontSize: '5px'
       };
       this.max = taginfo.tag_valor_max;
       this.value = taginfo.tag_valor_min;
@@ -60,10 +73,20 @@ export class GaugeComponent implements OnInit, OnDestroy {
        console.log('solicitando datos...');
        this._dataService.datatag(this.tag_id)
        .subscribe( (resp: any) => {
-        // console.log('Respuesta datatag: ', resp['datatag'] );
+         this.verde = false;
+         this.rojo = false;
+         this.azul = false;
+        console.log('Respuesta datatag: ', resp['datatag'] );
         const datatag = resp['datatag'];
         this.value = datatag.sensordata_valor;
         this.fecha = this.retornaFecha(datatag.sensordata_fecha_hora);
+          if (Number(this.value) > Number(this.lim_alto)) {
+            this.rojo = true;
+          } else if (Number(this.value) < Number(this.lim_bajo)) {
+            this.azul = true;
+          } else {
+            this.verde = true;
+          }
        });
 
        });

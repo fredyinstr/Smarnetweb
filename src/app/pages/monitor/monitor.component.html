@@ -1,14 +1,58 @@
-<div class="card" *ngFor="let tag of tags">
+<div class="row">
+    <div class="col-8">
+        <h4>Monitor</h4>
+    </div>
+    <div class="col-4">
+        <button (click)="monitor2()" class="btn btn-primary active"><i class="icon-chart-area"></i></button>&nbsp;
+        <!-- <button class="btn btn-primary"><i class="icon-chart-area"></i></button> -->
+    </div>
+</div>
+
+<hr>
+<!-- <ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+</ul> -->
+<!-- <div class="card" *ngFor="let tag of tags">
 
     <div class="card-body">
         <div class="row">
-            <div class="col-4 text-center">
-                <app-gauge [tag_id]=" tag.tag_id "></app-gauge>
+            <div class="col-3 text-center">
+                <app-gauge [tag_id]=" tag.tag_id " [lim_bajo]="tag.limite_bajo" [lim_alto]="tag.limite_alto"></app-gauge>
             </div>
-            <div class="col-8">
+            <div class="col-9">
                 <app-chart [tag_id]="tag.tag_id" [continuo]='true'></app-chart>
             </div>
         </div>
+        <p><small>Límite bajo: {{tag.limite_bajo}}{{tag.simbolo}} ---  Límite alto: {{tag.limite_alto}}{{tag.simbolo}}</small> </p>
+    </div>
+</div> -->
 
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-4 col-12 text-center" *ngFor="let tag of tags">
+        <app-gauge [tag_id]=" tag.tag_id " [lim_bajo]="tag.limite_bajo" [lim_alto]="tag.limite_alto"></app-gauge>
     </div>
 </div>
+
+<!-- <div class="row">
+    <div class="col-sm-6 col-12 text-center pb-4" *ngFor="let tag of tags">
+        <div class="row">
+            <div class="col-12">
+                <p><small>{{tag.tag_descripcion}}</small></p>
+            </div>
+        </div>
+        <app-chart [tag_id]="tag.tag_id" [continuo]='true'></app-chart>
+    </div>
+</div> -->

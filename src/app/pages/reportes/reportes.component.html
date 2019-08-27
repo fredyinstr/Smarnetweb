@@ -1,6 +1,11 @@
 <div class="row">
     <div class="col-12">
-        <h4>Reporte por fecha</h4>
+        <div class="row">
+            <h4 class="col-md-6">Reporte por fecha</h4>
+            <button *ngIf="pdf" class="btn btn-outline-light col-md-6" (click)="generarPdf()">
+                <img height="60px" src='../../../smarnet/assets/img/pdf.png'/>
+            </button>
+        </div>
         <hr>
     </div>
 </div>
@@ -32,7 +37,7 @@
                 <div class="col-sm-4">
                     <select class="form-control" id="tag" name="tag" (change)="selectTag($event)">
                     <option value=''>Seleccionar Tag</option>                
-                    <option [value]=tag.tag_id *ngFor="let tag of tag_list" >{{tag.tag_descripcion}}</option>                
+                    <option [value]=tag.tag_id *ngFor="let tag of tag_list" id="descripcion" >{{tag.tag_descripcion}}</option>                
                   </select>
                 </div>
                 <!-- </div>
@@ -49,8 +54,9 @@
 
 <div class="row">
 
-    <div class="col-11">
-        <app-chart [tag_id]="tag_id" [desde]="fechaDesde" [hasta]="fechaHasta" [continuo]='false'></app-chart>
+    <div class="col-11" *ngIf="fechaDesde">
+        <p><b>Reporte desde {{repDesde}}, hasta {{repHasta}}</b></p>
+        <app-chart [tag_id]="tag_id" [desde]="fechaDesde" [hasta]="fechaHasta" [continuo]='false' [unit]="unit"></app-chart>
     </div>
 
 </div>

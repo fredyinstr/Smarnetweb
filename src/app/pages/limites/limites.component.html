@@ -1,33 +1,56 @@
-<h4>Límites de la variable</h4>
+<h4>Límites de la variable (Tag)</h4>
 <hr>
-<form class="block">
-    <div class="form-row">
-        <div class=" form-group col-12">
-            <label for="tags">Tags</label>
+
+<form>
+    <div class="form-row align-items-center">
+        <div class="col-md-4 form-group form-inline">
+            <label class="mr-2" for="tags">Tag</label>
             <select class="form-control" id="tags" (change)="valoresTag($event)">
-              <option *ngFor="let tag of tags" >{{tag.tag_descripcion}}</option>
+                <option value="">Seleccione tag</option>
+                <option *ngFor="let tag of tags" [value] = "tag.tag_id" >{{tag.tag_descripcion}}</option>
             </select>
         </div>
-        <div class="form-group col-md-6">
-            <label for="lh">Límite alto</label>
-            <input type="text" [(ngModel)]="lh" name="lh" class="form-control" placeholder="Límite alto">
+        <div class="col-md-4 form-group form-inline">
+            <label class="mr-2" for="ll">Límite bajo</label>
+            <input size="3" type="text" [(ngModel)]="ll" name="ll" class="form-control mr-2">{{symbol}}
         </div>
-        <div class="form-group col-md-6">
-            <label for="luh">Límite ultra alto</label>
-            <input type="text" [(ngModel)]="luh" name="luh" class="form-control" id="luh" placeholder="Límite ultra alto">
+        <div class="col-md-4 form-group form-inline">
+            <label class="mr-2" for="lh">Límite alto</label>
+            <input size="3" type="text" [(ngModel)]="lh" name="lh" class="form-control mr-2" id="lh">{{symbol}}
         </div>
     </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="ll">Límite alto</label>
-            <input type="text" [(ngModel)]="ll" name="ll" class="form-control" id="ll" placeholder="Límite bajo">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="lul">Límite ultra alto</label>
-            <input type="text" [(ngModel)]="lul" name="lul" class="form-control" id="lul" placeholder="Límite ultra bajo">
+    <div class="form-row align-items-center">
+        <div class="col-12 form-group form-inline">
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Notificar cuando el valor de tag sobrepase los límites por más de:</label>
+            <select class="custom-select mr-sm-2" id="tiemponot" (change)="seleccionTiempo($event)">
+            <option selected value="null">No notificar</option>
+            <option [selected]="tiemponot===60" value="60">1 minuto</option>
+            <option [selected]="tiemponot===120" value="120">2 minutos</option>
+            <option [selected]="tiemponot===180" value="180">3 minutos</option>
+            <option [selected]="tiemponot===240" value="240">4 minutos</option>
+            <option [selected]="tiemponot===300" value="300">5 minutos</option>
+            <option [selected]="tiemponot===600" value="600">10 minutos</option>
+            <option [selected]="tiemponot===900" value="900">15 minutos</option>
+            <option [selected]="tiemponot===1200" value="1200">20 minutos</option>
+            <option [selected]="tiemponot===1500" value="1500">25 minutos</option>
+            <option [selected]="tiemponot===1800" value="1800">30 minutos</option>
+            <option [selected]="tiemponot===2100" value="2100">35 minutos</option>
+            <option [selected]="tiemponot===2400" value="2400">40 minutos</option>
+            <option [selected]="tiemponot===2700" value="2700">45 minutos</option>
+            <option [selected]="tiemponot===3000" value="3000">50 minutos</option>
+            <option [selected]="tiemponot===3300" value="3300">55 minutos</option>
+            <option [selected]="tiemponot===3600" value="3600">1 hora</option>
+            <option [selected]="tiemponot===3600" value="5400">1 hora y media</option>
+            <option [selected]="tiemponot===7200" value="7200">2 horas</option>
+            <option [selected]="tiemponot===10800" value="10800">3 horas</option>
+            <option [selected]="tiemponot===10800" value="12600">3 horas y media</option>
+            <option [selected]="tiemponot===14400" value="14400">4 horas</option>
+            <option [selected]="tiemponot===14400" value="16200">4 horas y media</option>
+            <option [selected]="tiemponot===18000" value="18000">5 horas</option>
+            </select>
         </div>
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Guardar límites</button>
+    <button (click)="guardarLimites()" type="submit" class="btn btn-primary">Guardar límites</button>
 </form>

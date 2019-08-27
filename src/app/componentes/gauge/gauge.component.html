@@ -1,2 +1,7 @@
-<justgage *ngIf="options" [options]="options" [max]="max" [value]="value"></justgage>
-<h4 text-center>{{fecha}}</h4>
+<justgage *ngIf="options" [options]="options" [max]="max" [value]="value" style="height: 150px; border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" [ngClass]="{verde: verde, azul: azul, rojo: rojo}">
+</justgage>
+<p text-center><small>
+    <span style="color: darkgreen"><b>{{fecha}} </b></span>
+    <span style="color: blue"> min:{{lim_bajo}} </span>
+    <span style="color: red"> máx: {{lim_alto}}</span>
+</small></p>

@@ -7,10 +7,12 @@ import { TagsComponent } from './pages/tags/tags.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { LimitesComponent } from './pages/limites/limites.component';
+import { Monitor2Component } from './pages/monitor2/monitor2.component';
 
 const app_routes: Routes = [
     { path: '', component: MonitorComponent},
     { path: 'monitor', component: MonitorComponent},
+    { path: 'monitor2', component: Monitor2Component},
     { path: 'alarmas', component: AlarmasComponent},
     { path: 'usuarios', component: UsuariosComponent},
     { path: 'reportes', component: ReportesComponent},

@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-8">
+        <h4>Monitor</h4>
+    </div>
+    <div class="col-4">
+        <button (click)="monitor()" class="btn btn-primary active"><i class="icon-th"></i></button>&nbsp;
+        <!-- <button [routerLink]="['monitor2']" class="btn btn-primary"><i class="icon-chart-area"></i></button> -->
+    </div>
+</div>
+<hr>
+
+<div class="row">
+    <div class="col-sm-6 col-12 text-center pb-4" *ngFor="let tag of tags">
+        <div class="row">
+            <div class="col-12">
+                <p><small>{{tag.tag_descripcion}}</small></p>
+            </div>
+        </div>
+        <app-chart [tag_id]="tag.tag_id" [continuo]='true'></app-chart>
+    </div>
+</div>

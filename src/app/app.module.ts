@@ -23,6 +23,8 @@ import { LimitesComponent } from './pages/limites/limites.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { Monitor2Component } from './pages/monitor2/monitor2.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     GaugeComponent,
     ChartComponent,
     ReportesComponent,
-    LimitesComponent
+    LimitesComponent,
+    Monitor2Component
   ],
   imports: [
     BrowserModule,

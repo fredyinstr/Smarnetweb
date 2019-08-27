@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,16 +8,17 @@ import { DataService } from '../../services/data.service';
   templateUrl: './monitor.component.html',
   styleUrls: ['./monitor.component.css']
 })
+
 export class MonitorComponent implements OnInit {
   tag_id = '29';
 
   tags: any [] = [];
 
   options = {
-    title: 'Bloque 1 T1'
+    title: ''
   };
   max = 100;
-  value = 67;
+  value = 0;
 
    // lineChart
 
@@ -66,10 +68,15 @@ export class MonitorComponent implements OnInit {
 
   };
 
-  constructor( private _dataService: DataService) { }
+  constructor( private _dataService: DataService,
+              private router: Router) { }
+
+  monitor2() {
+    this.router.navigate(['monitor2']);
+  }
 
   ngOnInit() {
-    this._dataService.tagsPorCliente(1)
+    this._dataService.tagsPorCliente(2)
       .subscribe((resp: any) => {
         console.log('Tags por cliente: ', resp.tags);
         this.tags = resp.tags;

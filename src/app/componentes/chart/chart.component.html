@@ -1,4 +1,12 @@
 <div>
     <canvas *ngIf="tag_id" baseChart height="85px" [datasets]="lineChartData" [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType">
     </canvas>
+    <p *ngIf="show" text-center><small>
+            <span style="color: blue">Valor mínimo: {{minimo}} </span>
+            <span style="color: red"> Valor máximo: {{maximo}} </span>
+            <span style="color: orange"> Promedio: {{promedio}}</span>
+        </small></p>
+    <p *ngIf="!show" text-center><small>
+            <span style="color: red"> Cargando... </span>
+        </small></p>
 </div>
