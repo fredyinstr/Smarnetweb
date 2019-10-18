@@ -55,7 +55,7 @@ export class ReportesComponent implements OnInit {
         const col = [['Fecha', 'Valor medido']];
         const rows = [];
         resp.data.forEach(element => {
-        const temp = [element.t, element.y + '°C'];
+        const temp = [element.t, element.y + ' cm'];
         rows.push(temp);
         });
         doc.autoTableSetDefaults({
