@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/UsuarioService';
 
 
 @Component({
@@ -69,18 +70,43 @@ export class MonitorComponent implements OnInit {
   };
 
   constructor( private _dataService: DataService,
-              private router: Router) { }
+              private router: Router, private _usuario: UsuarioService) { }
 
   monitor2() {
     this.router.navigate(['monitor2']);
   }
 
+  hexToBase64(str) {
+    return btoa(String.fromCharCode.apply(null,
+      str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
+    );
+}
+
   ngOnInit() {
-    this._dataService.tagsPorCliente(2)
-      .subscribe((resp: any) => {
-        console.log('Tags por cliente: ', resp.tags);
-        this.tags = resp.tags;
-      });
+    console.log("Iniciando monitor...");
+    
+    // this._dataService.tagsPorCliente(2)
+    //   .subscribe((resp: any) => {
+    //     console.log('Tags por cliente: ', resp.tags);
+    //     this.tags = resp.tags;
+    //   });
+
+    if (this._usuario.tags.length === 0)
+        this.router.navigate(['login']);
+    this.tags = this._usuario.tags;
+    console.log("tags: ", this.tags);
+    console.log("Cadena ecoded: ", this.hexToBase64("030101"));
+    
+    
+
+
+      // console.log("Token: ", this._usuario.token);
+      // console.log("cliente: ", this._usuario.cliente);
+      // console.log("tags: ", this._usuario.tags);
+      // console.log("perfil: ", this._usuario.usuario.usuario_perfil);
   }
+
+  
+  
 
 }

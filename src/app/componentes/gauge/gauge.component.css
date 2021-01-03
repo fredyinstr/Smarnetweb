@@ -2,10 +2,18 @@
     background-color: rgba(94, 255, 0, 0.897);
 }
 
+.verde1 {
+    background-color: rgba(68, 175, 6, 0.699);
+}
+
 .azul {
     background-color: rgba(0, 119, 255, 0.904);
 }
 
 .rojo {
     background-color: rgb(255, 0, 0);
+}
+
+.naranja {
+    background-color: rgba(248, 32, 3, 0.795);
 }

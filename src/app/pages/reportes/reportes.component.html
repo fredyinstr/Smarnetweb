@@ -3,7 +3,7 @@
         <div class="row">
             <h4 class="col-md-6">Reporte por fecha</h4>
             <button *ngIf="pdf" class="btn btn-outline-light col-md-6" (click)="generarPdf()">
-                <img height="60px" src='../../../smarnet/assets/img/pdf.png'/>
+                <img height="60px" src='./assets/img/pdf.png'/>
             </button>
         </div>
         <hr>
@@ -21,8 +21,6 @@
                 <div class="col-sm-3">
                     <timepicker [showMeridian]="ismeridian" [(ngModel)]="hd" name="hd"></timepicker>
                 </div>
-                <!-- </div>
-            <div class="form-group row"> -->
                 <label for="fh" class="col-sm-1 align-self-center">Hasta</label>
                 <div class="col-sm-2 align-self-center">
                     <input type="text" [(ngModel)]="fh" name="fh" placeholder="Hasta" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import Swal from 'sweetalert2'; // https://www.npmjs.com/package/sweetalert2
+import { UsuarioService } from 'src/app/services/UsuarioService';
 
 
 @Component({
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2'; // https://www.npmjs.com/package/sweetalert2
   styleUrls: ['./limites.component.css']
 })
 export class LimitesComponent implements OnInit {
-  tags: [] = [];
+  tags: any [] = [];
   ll = '0';
   lh = '0';
   lul = '';
@@ -17,11 +18,12 @@ export class LimitesComponent implements OnInit {
   symbol = '';
   tag_id = null;
   tiemponot = null;
+  nombreTag = '';
 
-  constructor( private _dataService: DataService ) { }
+  constructor( private _dataService: DataService, private _usuario: UsuarioService ) { }
 
   sonValidos() {
-    console.log('lh: ', this.lh);
+    // console.log('lh: ', this.lh);
 
       if ((this.lh == null )) {
         Swal.fire('ERROR', 'Valor no válido!', 'warning');
@@ -47,7 +49,7 @@ export class LimitesComponent implements OnInit {
   }
 
   valoresTag(tag) {
-    console.log ('tag a buscar: ', tag.target.value);
+    // console.log ('tag a buscar: ', tag.target.value);
     this.tag_id = tag.target.value;
     this._dataService.limitesTag( this.tag_id )
       .subscribe( (resp: any) => {
@@ -56,19 +58,20 @@ export class LimitesComponent implements OnInit {
         this.lh = resp.limites.limite_alto;
         this.symbol = resp.limites.tag_symbol;
         this.tiemponot = Number(resp.limites.tiemponot);
-        console.log('tt: ', this.tiemponot);
+        this.nombreTag = resp.limites.tag_descripcion;
+        // console.log('tt: ', this.tiemponot);
       });
   }
 
   seleccionTiempo(tiempo) {
     this.tiemponot = tiempo.target.value;
-    console.log('Tiempo not: ', this.tiemponot);
+    // console.log('Tiempo not: ', this.tiemponot);
   }
 
   guardarLimites() {
     if (this.sonValidos()) {
-      console.log('guardando...');
-      this._dataService.updateLimitesTag( this.tag_id, this.ll, this.lh, this.tiemponot )
+      // console.log('guardando...');
+      this._dataService.updateLimitesTag( this.tag_id, this.ll, this.lh, this.tiemponot, this.nombreTag )
       .subscribe( (resp: any) => {
         // console.log('respuesta guardar limites: ', resp );
         Swal.fire('OK', resp.respuesta, 'success');
@@ -77,11 +80,12 @@ export class LimitesComponent implements OnInit {
 }
 
   ngOnInit() {
-    this._dataService.tagsPorCliente(2)
-    .subscribe( (resp: any) => {
-    console.log('Respuesta tagsByClient: ', resp.tags );
-    this.tags = resp.tags;
-  });
+  //   this._dataService.tagsPorCliente(2)
+  //   .subscribe( (resp: any) => {
+  //   console.log('Respuesta tagsByClient: ', resp.tags );
+  //   this.tags = resp.tags;
+  // });
+  this.tags = this._usuario.tags;
   }
 
 }

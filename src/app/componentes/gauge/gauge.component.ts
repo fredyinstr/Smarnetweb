@@ -26,6 +26,8 @@ export class GaugeComponent implements OnInit, OnDestroy {
   verde = true;
   azul = false;
   rojo = false;
+  verde1 = false;
+  naranja = false;
 
   retornaFecha( fecha ) {
     const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
@@ -45,8 +47,10 @@ export class GaugeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._dataService.taginfo(this.tag_id)
     .subscribe( (resp: any) => {
-      // console.log('Respuesta: ', resp['taginfo'] );
+      // console.log('Respuesta TAG INFO: ', resp['taginfo'] );
       const taginfo: any = resp['taginfo'];
+      this.lim_bajo = taginfo.m3;
+      this.lim_alto = taginfo.m2;
       this.options = {
         title: taginfo.tag_descripcion,
         titleFontColor : 'black',
@@ -70,23 +74,36 @@ export class GaugeComponent implements OnInit, OnDestroy {
 
 
     timer(100, 60000).pipe(takeWhile(() => this.alive)).subscribe(() => {
-       console.log('solicitando datos...');
+      //  console.log('solicitando datos...');
        this._dataService.datatag(this.tag_id)
        .subscribe( (resp: any) => {
          this.verde = false;
          this.rojo = false;
          this.azul = false;
-        console.log('Respuesta datatag: ', resp['datatag'] );
+         this.verde1 = false;
+         this.naranja = false;
+        // console.log('Respuesta datatag: ', resp['datatag'] );
         const datatag = resp['datatag'];
-        this.value = datatag.sensordata_valor;
-        this.fecha = this.retornaFecha(datatag.sensordata_fecha_hora);
-          if (Number(this.value) > Number(this.lim_alto)) {
+        if (!datatag) {
+          this.value = 0;
+        }else {
+          if (Number(datatag.sensordata_valor) > Number(this.lim_alto)) {
             this.rojo = true;
-          } else if (Number(this.value) < Number(this.lim_bajo)) {
-            this.azul = true;
+          } else if (Number(datatag.sensordata_valor) < Number(this.lim_bajo)) {
+            this.naranja = true;
           } else {
-            this.verde = true;
+            this.verde1 = true;
           }
+          this.value = datatag.sensordata_valor;
+          this.fecha = this.retornaFecha(datatag.sensordata_fecha_hora);
+        }
+          // if (Number(this.value) > Number(this.lim_alto)) {
+          //   this.rojo = true;
+          // } else if (Number(this.value) < Number(this.lim_bajo)) {
+          //   this.azul = true;
+          // } else {
+          //   this.verde = true;
+          // }
        });
 
        });

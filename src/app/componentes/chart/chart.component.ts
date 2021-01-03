@@ -2,6 +2,8 @@ import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { timer} from 'rxjs';
 import {takeWhile} from 'rxjs/operators';
+import { UsuarioService } from 'src/app/services/UsuarioService';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-chart',
@@ -44,7 +46,7 @@ export class ChartComponent implements OnInit, OnDestroy, OnChanges {
 
 
 // legend = this.tag_id;
- legend = 'Nivel cm';
+ legend = 'Nivel';
 // public lineChartOptions: any;
 public lineChartOptions: any = {
   scales: {
@@ -104,7 +106,7 @@ public lineChartOptions: any = {
 
 };
 
-  constructor( public _dataService: DataService) { }
+  constructor( public _dataService: DataService, private _usuario: UsuarioService) { }
 
   retornaFecha( fecha ) {
     const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
@@ -132,17 +134,17 @@ public lineChartOptions: any = {
   initChart() {
     this.show = false;
     this.resetData();
-    console.log('Unit desde chart: ', this.unit);
+    // console.log('Unit desde chart: ', this.unit);
     this._dataService.loadChart(this.tag_id, this.desde, this.hasta)
     .subscribe((data: any) => {
-       console.log('Data chart: ' + data['minimo']);
+      //  console.log('Data chart: ' + data['minimo']);
        this.minimo = data['minimo'];
        this.maximo = data['maximo'];
        this.promedio = Number(data['promedio']).toFixed(2);
         this.lineChartOptions.scales.xAxes[0].time.unit = this.unit;
         this.lineChartData1 = data['data'];
         this.fechaUltimo = this.lineChartData1[(this.lineChartData1.length - 1)].t;
-        console.log ('ultimo dato: ', this.fechaUltimo);
+        // console.log ('ultimo dato: ', this.fechaUltimo);
         this.lineChartData = this.lineChartData1;
         this.legend = ':)';
         this.show = true;
@@ -156,8 +158,8 @@ public lineChartOptions: any = {
         const datatag = resp.datatag;
         const fecha = datatag.sensordata_fecha_hora;
         if (fecha !== this.fechaUltimo) {
-          console.log('fecha: ', fecha);
-          console.log ('fecha ultimo: ', this.fechaUltimo);
+          // console.log('fecha: ', fecha);
+          // console.log ('fecha ultimo: ', this.fechaUltimo);
           const valor = datatag.sensordata_valor;
           const temp = {y: valor, t: fecha};
           this.fechaUltimo = fecha;
@@ -178,7 +180,7 @@ public lineChartOptions: any = {
   }
 
   ngOnChanges() {
-    console.log('Ocurrió un cambio...', this.tag_id);
+    // console.log('Ocurrió un cambio...', this.tag_id);
     // this.show = false;
     // this.lineChartOptions = {
     //   scales: {
@@ -240,14 +242,14 @@ public lineChartOptions: any = {
   }
 
   ngOnInit() {
-    console.log('Desde: ', this.desde);
-    console.log('Hasta: ', this.hasta);
+    // console.log('Desde: ', this.desde);
+    // console.log('Hasta: ', this.hasta);
 
     // this.initChart();
 
     if (this.continuo) {
       timer(5000, 50000).pipe(takeWhile(() => this.alive)).subscribe(() => {
-          console.log('Actualizando Chart...');
+          // console.log('Actualizando Chart...');
           this.actualizar();
         });
       }

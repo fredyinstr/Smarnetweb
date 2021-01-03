@@ -1,0 +1,32 @@
+.fondo {
+    /* background-image: url('../../../assets/img/login2.jpg'); */
+    /* background-color: rgba(5, 21, 63, 0.692); */
+    background-color: rgba(6, 10, 36, 0.877);
+    background-size: cover;
+    height: 100vh;
+}
+
+.logo {
+    position: absolute;
+    top: 50px;
+    left: 80px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.formulario {
+    top: 80px;
+}
+
+.card-form {
+    height: auto;
+}
+
+.titulo {
+    font-family: fantasy;
+    color: rgba(5, 14, 63, 0.884);
+    /* color: rgba(10, 10, 10, 0.363); */
+}
+
+.grey {
+    color: rgba(85, 83, 83, 0.507);
+}

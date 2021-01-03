@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams  } from '@angular/common/http';
 // import { Observable } from 'rxjs/Observable';
-import { URL_SERVICIOS } from '../config/config';
+import { URL_SERVICIOS, URL_API } from '../config/config';
+
 
 
 @Injectable({
@@ -19,7 +20,8 @@ export class DataService {
   }
 
   public datatag( tag ) {
-    const url = URL_SERVICIOS + 'iotdata/datatag/' + tag;
+    // const url = URL_SERVICIOS + 'iotdata/datatag/' + tag;
+    const url = URL_API + 'data/' + tag;
     return this.http.get(url);
   }
 
@@ -30,6 +32,7 @@ export class DataService {
     params = params.append('desde', desde);
     params = params.append('hasta', hasta);
     const url = URL_SERVICIOS + 'iotdata/historico/' + tag;
+    // const url = URL_API + 'data/historico/' + tag;
     return this.http.get(url, { params: params });
   }
 
@@ -55,11 +58,12 @@ export class DataService {
     const url = URL_SERVICIOS + 'iotdata/limitesTag/' + tag_id;
     return this.http.get(url);
   }
-  updateLimitesTag( tag_id: any, m1: any = '', m2: any = '', tiemponot: any = '' ) {
+  updateLimitesTag( tag_id: any, m1: any = '', m2: any = '', tiemponot: any = '', nombre: any = '' ) {
     let params = new HttpParams();
     params = params.append('m1', m1);
     params = params.append('m2', m2);
     params = params.append('tiemponot', tiemponot);
+    params = params.append('nombre', nombre);
     const url = URL_SERVICIOS + 'iotdata/updateLimitesTag/' + tag_id;
     return this.http.get(url, { params: params });
   }
@@ -84,5 +88,14 @@ export class DataService {
     params = params.append('correo2', correo2);
     const url = URL_SERVICIOS + 'iotdata/updateMedioNotificaciones/' + cliente_id;
     return this.http.get(url, { params: params });
+  }
+
+  cargarChart(tag) {
+    const url = URL_API + 'data/chartdata/' + tag;
+    return this.http.get(url);
+  }
+  lastData(tag) {
+    const url = URL_API + 'data/' + tag;
+    return this.http.get(url);
   }
 }

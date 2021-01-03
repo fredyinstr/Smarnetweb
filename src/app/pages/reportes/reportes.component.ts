@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Swal from 'sweetalert2'; // https://www.npmjs.com/package/sweetalert2
 
+// aspire5083 => clave correo Sandro
 
 @Component({
   selector: 'app-reportes',
@@ -47,10 +48,10 @@ export class ReportesComponent implements OnInit {
   }
 
   generarPdf () {
-    const descripcion = 'SMARNET V1.3 - Reporte ' + document.getElementById('descripcion').innerHTML;
+    const descripcion = 'VARSTRACKING V1.3 - Reporte ' + document.getElementById('descripcion').innerHTML;
     this._dataService.loadChart(this.tag_id, this.fechaDesde, this.fechaHasta)
       .subscribe((resp: any) => {
-        console.log('Reporte para pdf: ', resp.data);
+        // console.log('Reporte para pdf: ', resp.data);
         const doc = new jsPDF();
         const col = [['Fecha', 'Valor medido']];
         const rows = [];
@@ -58,6 +59,8 @@ export class ReportesComponent implements OnInit {
         const temp = [element.t, element.y + ' cm'];
         rows.push(temp);
         });
+        
+        
         doc.autoTableSetDefaults({
           headStyles: {fillColor: [48, 176, 240]},
           margin: {top: 25},
@@ -93,12 +96,12 @@ export class ReportesComponent implements OnInit {
     const millisDesde = new Date(this.convertirFecha(this.fd, this.hd)).getTime();
     const millisHasta = new Date(this.convertirFecha(this.fh, this.hh)).getTime();
     if (this.tagSeleccionado === '') {
-      console.log('Debe seleccionar un Tag');
+      // console.log('Debe seleccionar un Tag');
       Swal.fire('Oops...', 'Debe seleccionar un Tag!', 'error');
       return;
     }
     if (millisDesde > millisHasta) {
-      console.log('Fecha desde no puede ser mayor a fecha hasta');
+      // console.log('Fecha desde no puede ser mayor a fecha hasta');
       Swal.fire('Oops...', 'Fecha desde no puede ser mayor a fecha hasta!', 'error');
       return;
     }
@@ -119,9 +122,9 @@ export class ReportesComponent implements OnInit {
     this.fechaHasta = this.convertirFecha( this.fh, this.hh);
     this.repDesde = this.retornaFecha(this.fechaDesde);
     this.repHasta = this.retornaFecha(this.fechaHasta);
-    console.log('Fecha desde: ', this.fechaDesde);
-    console.log('Fecha hasta: ', this.fechaHasta);
-    console.log('Unit: ', this.unit);
+    // console.log('Fecha desde: ', this.fechaDesde);
+    // console.log('Fecha hasta: ', this.fechaHasta);
+    // console.log('Unit: ', this.unit);
   }
 
   ngOnInit() {
@@ -134,9 +137,9 @@ export class ReportesComponent implements OnInit {
     this.hh = new Date();
 
 
-    this._dataService.tagsPorCliente(2)
+    this._dataService.tagsPorCliente(5)
       .subscribe((resp: any) => {
-        console.log(resp);
+        // console.log(resp);
         this.tag_list = resp.tags;
       });
   }

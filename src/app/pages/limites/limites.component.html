@@ -1,24 +1,32 @@
-<h4>Límites de la variable (Tag)</h4>
+<h4>Información de Tags</h4>
 <hr>
 
 <form>
     <div class="form-row align-items-center">
-        <div class="col-md-4 form-group form-inline">
+        <div class="col-md-6 form-group form-inline">
             <label class="mr-2" for="tags">Tag</label>
             <select class="form-control" id="tags" (change)="valoresTag($event)">
                 <option value="">Seleccione tag</option>
                 <option *ngFor="let tag of tags" [value] = "tag.tag_id" >{{tag.tag_descripcion}}</option>
             </select>
         </div>
-        <div class="col-md-4 form-group form-inline">
+        <div class="col-md-6 form-group form-inline">
+            <label class="mr-2" for="ll">Nombre de tag</label>
+            <input [disabled]="_usuario.usuario.usuario_perfil!=='ADMIN_USER'" size="30" type="text" [(ngModel)]="nombreTag" name="nombreTag" class="form-control mr-2">
+        </div>
+    </div>
+    <hr>
+    <div class="form-row align-items-center">
+        <div class="col-md-6 form-group form-inline">
             <label class="mr-2" for="ll">Límite bajo</label>
             <input size="3" type="text" [(ngModel)]="ll" name="ll" class="form-control mr-2">{{symbol}}
         </div>
-        <div class="col-md-4 form-group form-inline">
+        <div class="col-md-6 form-group form-inline">
             <label class="mr-2" for="lh">Límite alto</label>
             <input size="3" type="text" [(ngModel)]="lh" name="lh" class="form-control mr-2" id="lh">{{symbol}}
         </div>
     </div>
+
     <div class="form-row align-items-center">
         <div class="col-12 form-group form-inline">
             <label class="mr-sm-2" for="inlineFormCustomSelect">Notificar cuando el valor de tag sobrepase los límites por más de:</label>
@@ -50,7 +58,7 @@
             </select>
         </div>
     </div>
+    <hr>
 
-
-    <button (click)="guardarLimites()" type="submit" class="btn btn-primary">Guardar límites</button>
+    <button (click)="guardarLimites()" type="submit" class="btn btn-primary">Guardar</button>
 </form>

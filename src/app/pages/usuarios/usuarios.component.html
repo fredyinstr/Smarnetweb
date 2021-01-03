@@ -1,3 +1,178 @@
-<p>
-    Usuarios estará habilitada en los próximos días!
-</p>
+<div class="col-12 pt-3  w-100">
+    <div class="row">
+        <h4 class="col-md-10">Usuarios</h4>
+    </div>
+    <hr>
+
+
+    <form autocomplete="off">
+        <div class="form-row">
+            <h4>Administrador:</h4>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="nombres">Nombres</label>
+                <input [(ngModel)]="usuarios[0].nombres" type="text" name="nombres" class="form-control" placeholder="Nombres">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="apellidos">Apellidos</label>
+                <input [(ngModel)]="usuarios[0].apellidos" type="text" name="apellidos" class="form-control" placeholder="apellidos">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="correo">Correo</label>
+                <input [(ngModel)]="usuarios[0].correo" type="email" name="correo" class="form-control" placeholder="correo">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="usuario">Usuario</label>
+                <input [(ngModel)]="usuarios[0].usuario" type="text" name="usuario" class="form-control" placeholder="usuario">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="contrasena">Contraseña</label>
+                <input [(ngModel)]="usuarios[0].contrasena" type="password" name="contrasena" class="form-control" placeholder="Contraseña">
+            </div>
+            <div class="form-group col-md-2 pt-4">
+                <button name="b" class="btn btn-success" (click)="actualizarUsuario(0, 1)">Guardar</button>
+            </div>
+
+        </div>
+        <div class="form-row">
+            <h4>Visualizadores:</h4>
+        </div>
+        <hr>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="nombres">Nombres</label>
+                <input [(ngModel)]="usuarios[1].nombres" type="text" name="nombres1" class="form-control" placeholder="Nombres">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="apellidos">Apellidos</label>
+                <input [(ngModel)]="usuarios[1].apellidos" type="text" name="apellidos1" class="form-control" placeholder="apellidos">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="correo">Correo</label>
+                <input [(ngModel)]="usuarios[1].correo" type="email" name="correo1" class="form-control" placeholder="correo">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="usuario">Usuario</label>
+                <input [(ngModel)]="usuarios[1].usuario" type="text" name="usuario1" class="form-control" placeholder="usuario">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="contrasena">Contraseña</label>
+                <input [(ngModel)]="usuarios[1].contrasena" type="password" name="contrasena1" class="form-control" placeholder="Contraseña">
+            </div>
+            <div class="form-group col-md-2 pt-4">
+                <button name="b" class="btn btn-success" (click)="actualizarUsuario(1, 25)">Guardar</button>
+            </div>
+
+        </div>
+        <hr>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="nombres">Nombres</label>
+                <input [(ngModel)]="usuarios[2].nombres" type="text" name="nombres2" class="form-control" placeholder="Nombres">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="apellidos">Apellidos</label>
+                <input [(ngModel)]="usuarios[2].apellidos" type="text" name="apellidos2" class="form-control" placeholder="apellidos">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="correo">Correo</label>
+                <input [(ngModel)]="usuarios[2].correo" type="email" name="correo2" class="form-control" placeholder="correo">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="usuario">Usuario</label>
+                <input [(ngModel)]="usuarios[2].usuario" type="text" name="usuario2" class="form-control" placeholder="usuario">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="contrasena">Contraseña</label>
+                <input [(ngModel)]="usuarios[2].contrasena" type="password" name="contrasena2" class="form-control" placeholder="Contraseña">
+            </div>
+            <div class="form-group col-md-2 pt-4">
+                <button name="b" class="btn btn-success" (click)="actualizarUsuario(2, 26)">Guardar</button>
+            </div>
+
+        </div>
+        <hr>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="nombres">Nombres</label>
+                <input [(ngModel)]="usuarios[3].nombres" type="text" name="nombres3" class="form-control" placeholder="Nombres">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="apellidos">Apellidos</label>
+                <input [(ngModel)]="usuarios[3].apellidos" type="text" name="apellidos3" class="form-control" placeholder="apellidos">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="correo">Correo</label>
+                <input [(ngModel)]="usuarios[3].correo" type="email" name="correo3" class="form-control" placeholder="correo">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="usuario">Usuario</label>
+                <input [(ngModel)]="usuarios[3].usuario" type="text" name="usuario3" class="form-control" placeholder="usuario">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="contrasena">Contraseña</label>
+                <input [(ngModel)]="usuarios[3].contrasena" type="password" name="contrasena3" class="form-control" placeholder="Contraseña">
+            </div>
+            <div class="form-group col-md-2 pt-4">
+                <button name="b" class="btn btn-success" (click)="actualizarUsuario(3, 27)">Guardar</button>
+            </div>
+
+        </div>
+        <hr>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="nombres">Nombres</label>
+                <input [(ngModel)]="usuarios[4].nombres" type="text" name="nombres4" class="form-control" placeholder="Nombres">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="apellidos">Apellidos</label>
+                <input [(ngModel)]="usuarios[4].apellidos" type="text" name="apellidos4" class="form-control" placeholder="apellidos">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="correo">Correo</label>
+                <input [(ngModel)]="usuarios[4].correo" type="email" name="correo4" class="form-control" placeholder="correo">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="usuario">Usuario</label>
+                <input [(ngModel)]="usuarios[4].usuario" type="text" name="usuario4" class="form-control" placeholder="usuario">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="contrasena">Contraseña</label>
+                <input [(ngModel)]="usuarios[4].contrasena" type="password" name="contrasena4" class="form-control" placeholder="Contraseña">
+            </div>
+            <div class="form-group col-md-2 pt-4">
+                <button name="b" class="btn btn-success" (click)="actualizarUsuario(4, 28)">Guardar</button>
+            </div>
+
+        </div>
+        <hr>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="nombres">Nombres</label>
+                <input [(ngModel)]="usuarios[5].nombres" type="text" name="nombres5" class="form-control" placeholder="Nombres">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="apellidos">Apellidos</label>
+                <input [(ngModel)]="usuarios[5].apellidos" type="text" name="apellidos5" class="form-control" placeholder="apellidos">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="correo">Correo</label>
+                <input [(ngModel)]="usuarios[5].correo" type="email" name="correo5" class="form-control" placeholder="correo">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="usuario">Usuario</label>
+                <input [(ngModel)]="usuarios[5].usuario" type="text" name="usuario5" class="form-control" placeholder="usuario">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="contrasena">Contraseña</label>
+                <input [(ngModel)]="usuarios[5].contrasena" type="password" name="contrasena5" class="form-control" placeholder="Contraseña">
+            </div>
+            <div class="form-group col-md-2 pt-4">
+                <button name="b" class="btn btn-success" (click)="actualizarUsuario(5, 29)">Guardar</button>
+            </div>
+
+        </div>
+    </form>
+
+</div>

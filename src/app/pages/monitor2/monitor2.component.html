@@ -9,7 +9,7 @@
 </div>
 <hr>
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-sm-6 col-12 text-center pb-4" *ngFor="let tag of tags">
         <div class="row">
             <div class="col-12">
@@ -18,4 +18,10 @@
         </div>
         <app-chart [tag_id]="tag.tag_id" [continuo]='true'></app-chart>
     </div>
+</div> -->
+
+<!-- <div class="row"> -->
+<div *ngFor="let tag of tags">
+    <app-chart-wide [tag]="tag"></app-chart-wide>
 </div>
+<!-- </div> -->

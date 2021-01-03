@@ -3,6 +3,7 @@ import { DataService } from '../../services/data.service';
 import Swal from 'sweetalert2'; // https://www.npmjs.com/package/sweetalert2
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { UsuarioService } from 'src/app/services/UsuarioService';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class AlarmasComponent implements OnInit {
   correo1 = '';
   correo2 = '';
 
-  constructor( public _dataService: DataService ) { }
+  constructor( public _dataService: DataService, private _usuario:UsuarioService ) { }
   generarPdf() {
     const doc = new jsPDF();
     doc.autoTable({html: '#notificacionesTable'});
@@ -40,11 +41,11 @@ export class AlarmasComponent implements OnInit {
   }
 
   cargarNotificaciones() {
-    this._dataService.notificaciones(2)
+    this._dataService.notificaciones(5)
     .subscribe( (resp: any) => {
     // console.log('Respuesta: ', resp['taginfo'] );
     const notificaciones: any = resp['notificaciones'];
-    console.log('Notificaciones: ', notificaciones);
+    // console.log('Notificaciones: ', notificaciones);
     this.notificaciones = resp['notificaciones'];
     this.clicked = false;
   });
@@ -54,13 +55,13 @@ export class AlarmasComponent implements OnInit {
     this.clicked = true;
     this._dataService.revisarNotificacion( noti_id )
     .subscribe( ( resp: any ) => {
-      console.log('Recibido revisar: ', resp);
+      // console.log('Recibido revisar: ', resp);
       this.cargarNotificaciones();
     });
   }
 
   actualizarMedios() {
-    this._dataService.updateMedioNotificaciones(2, this.telefono1, this.correo1, this.correo2)
+    this._dataService.updateMedioNotificaciones(5, this.telefono1, this.correo1, this.correo2)
       .subscribe( (resp: any) => {
         // console.log('respuesta guardar limites: ', resp );
         Swal.fire('OK', resp.respuesta, 'success');
@@ -68,9 +69,9 @@ export class AlarmasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._dataService.ObtenerMedioNotificaciones(2)
+    this._dataService.ObtenerMedioNotificaciones(5)
       .subscribe( (resp: any ) => {
-        console.log('respuesta medios: ', resp);
+        // console.log('respuesta medios: ', resp);
         this.telefono1 = resp.medios.telefono1 === 'null' ? 'Sin definir' : resp.medios.telefono1;
         this.correo1 = resp.medios.correo1 === 'null' ? 'Sin definir' : resp.medios.correo1;
         this.correo2 = resp.medios.correo2 === 'null' ? 'Sin definir' : resp.medios.correo2;
