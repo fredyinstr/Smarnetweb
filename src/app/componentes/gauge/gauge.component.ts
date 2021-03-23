@@ -72,8 +72,8 @@ export class GaugeComponent implements OnInit, OnDestroy {
       this.value = taginfo.tag_valor_min;
     });
 
-
-    timer(100, 60000).pipe(takeWhile(() => this.alive)).subscribe(() => {
+    
+    timer(500, 50000).pipe(takeWhile(() => this.alive)).subscribe(() => {
       //  console.log('solicitando datos...');
        this._dataService.datatag(this.tag_id)
        .subscribe( (resp: any) => {

@@ -20,7 +20,7 @@ export class LimitesComponent implements OnInit {
   tiemponot = null;
   nombreTag = '';
 
-  constructor( private _dataService: DataService, private _usuario: UsuarioService ) { }
+  constructor( private _dataService: DataService, public _usuario: UsuarioService ) { }
 
   sonValidos() {
     // console.log('lh: ', this.lh);

@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild, Input } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import { DataService } from 'src/app/services/data.service';
+import * as moment from 'moment';
+import 'moment/locale/es';
+
 
 @Component({
   selector: 'app-chart-wide',
@@ -21,14 +24,21 @@ export class ChartWideComponent implements OnInit, OnDestroy {
     scales: {
       xAxes: [{
         time: {
-          unit: 'minute',
-          unitStepSize: 0.5,
+          unit: 'hour',
+          // unitStepSize: 0.5,
+          stepSize:1,
+          tooltipFormat: 'MMM D, h:mm a'
           },
           type: 'time',
           distribution: 'linear',
           position: 'bottom',
           ticks: {
-           autoSkip: true
+           autoSkip: true,
+           major: {
+            enabled: true, // <-- This is the key line
+            fontStyle: 'bold', //You can also style these values differently
+            fontSize: 14 //You can also style these values differently
+         },
          }
       }], 
       yAxes: [{        
@@ -37,9 +47,14 @@ export class ChartWideComponent implements OnInit, OnDestroy {
           labelString: '',
           fontColor: "red"
         },
+        ticks: {
+          min: 0,
+          max: 100
+        }
       }]
   },
     responsive: true,
+    maintainAspectRatio: false,
     animation: false,
     tooltips: {
       mode: 'index',
@@ -90,10 +105,14 @@ export class ChartWideComponent implements OnInit, OnDestroy {
     }, 500)
   }
 
-  loadChart(){
+  loadChart(){    
+      // console.log("Solilcitando...");
+      
     this._data.cargarChart(this.tag.tag_id)
-      .subscribe((chart:any)=>{
-        console.log("Data chart: ", chart); 
+      .subscribe((chart:any)=>{        
+        // this.lineChartData[0].data = [];
+        // this.lineChartLabels = [];
+        // console.log("Data chart: ", chart); 
         let arreglo = chart.chardata.reverse(); 
         arreglo.forEach(data => {
           // console.log(data.data);
@@ -104,14 +123,31 @@ export class ChartWideComponent implements OnInit, OnDestroy {
         });    
         this.chart.update();  
       })
+    
+  }
+
+  actualizador() {
+    
+    this.intervalo = setInterval(()=>{
+      console.log("Nuevo dato...");
+      this.lineChartData[0].data.push(2)
+      this.lineChartLabels.push(new Date());
+      this.chart.update();
+    }, 5000);
   }
 
   
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
   ngOnInit() {
+    console.log(moment.locale());
+    // console.log("Datos del tag: ", this.tag);
+    
     this.lineChartOptions.scales.yAxes[0].scaleLabel.labelString = this.tag.tag_nombre + " " +this.tag.tag_symbol;
+    this.lineChartOptions.scales.yAxes[0].ticks.min = this.tag.tag_valor_min;
+    this.lineChartOptions.scales.yAxes[0].ticks.max = this.tag.tag_valor_max;
     this.lineChartData[0].label = this.tag.tag_descripcion;
     this.loadChart();
+    // this.actualizador();
   }
 
   ngOnDestroy() {

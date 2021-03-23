@@ -9,7 +9,7 @@ import { UsuarioService } from 'src/app/services/UsuarioService';
 export class SidebarComponent implements OnInit {
   logo = "";
 
-  constructor(private _usuario: UsuarioService) { }
+  constructor(public _usuario: UsuarioService) { }
 
   ngOnInit() {
     this.logo = "./assets/img/"+this._usuario.cliente.logo;

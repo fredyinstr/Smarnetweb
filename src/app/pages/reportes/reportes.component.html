@@ -1,13 +1,8 @@
 <div class="row">
     <div class="col-12">
-        <div class="row">
-            <h4 class="col-md-6">Reporte por fecha</h4>
-            <button *ngIf="pdf" class="btn btn-outline-light col-md-6" (click)="generarPdf()">
-                <img height="60px" src='./assets/img/pdf.png'/>
-            </button>
-        </div>
-        <hr>
+        <h4 class="col-md-6">Reporte por fecha</h4>
     </div>
+    <hr>
 </div>
 <div class="row">
     <div class="col-12">
@@ -38,23 +33,34 @@
                     <option [value]=tag.tag_id *ngFor="let tag of tag_list" id="descripcion" >{{tag.tag_descripcion}}</option>                
                   </select>
                 </div>
-                <!-- </div>
-            <div class="form-group row"> -->
                 <button (click)="buscar()" class="btn btn-primary">Buscar</button>
             </div>
 
         </form>
     </div>
 </div>
-
-
-
-
 <div class="row">
+    <div class="col-12">
+        <button *ngIf="pdf" class="btn btn-outline-light col-md-2" (click)="generarPdf()">
+            <img height="60px" src='./assets/img/pdf.png'/>
+        </button>
+        <button *ngIf="pdf" class="btn btn-outline-light col-md-2" (click)="generarCsv()">
+            <img height="50px" src='./assets/img/export-csv.png'/>
+        </button>
+    </div>
+    <div class="col-12" *ngIf="!pdf">
+        <h4>{{status}}</h4>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="row">
 
     <div class="col-11" *ngIf="fechaDesde">
         <p><b>Reporte desde {{repDesde}}, hasta {{repHasta}}</b></p>
         <app-chart [tag_id]="tag_id" [desde]="fechaDesde" [hasta]="fechaHasta" [continuo]='false' [unit]="unit"></app-chart>
     </div>
 
-</div>
+</div> -->

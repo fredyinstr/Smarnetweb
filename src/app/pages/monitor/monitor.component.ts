@@ -96,6 +96,8 @@ export class MonitorComponent implements OnInit {
     this.tags = this._usuario.tags;
     console.log("tags: ", this.tags);
     console.log("Cadena ecoded: ", this.hexToBase64("030101"));
+    console.log("Cadena ecoded: ", this.hexToBase64("030000"));
+    console.log("Cadena ecoded: ", this.hexToBase64("030001"));
     
     
 

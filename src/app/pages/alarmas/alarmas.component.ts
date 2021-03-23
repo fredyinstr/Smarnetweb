@@ -18,7 +18,7 @@ export class AlarmasComponent implements OnInit {
   correo1 = '';
   correo2 = '';
 
-  constructor( public _dataService: DataService, private _usuario:UsuarioService ) { }
+  constructor( public _dataService: DataService, public _usuario:UsuarioService ) { }
   generarPdf() {
     const doc = new jsPDF();
     doc.autoTable({html: '#notificacionesTable'});
