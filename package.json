@@ -32,7 +32,7 @@
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.1.3",
     "justgage": "^1.2.2",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "ng2-charts": "^2.0.0-beta.9",
     "ngx-bootstrap": "^5.1.0",
     "raphael": "^2.2.7",
